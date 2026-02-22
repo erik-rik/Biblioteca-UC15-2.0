@@ -8,6 +8,14 @@ package biblioteca.uc15.DAO;
  *
  * @author PAULO
  */
-public class GenericoDAO {
+
+import java.util.List;
+
+public interface GenericoDAO<X> {
     
+    void salvar(X entidade);
+    void atualizar(X entidade);
+    void excluir(int id);
+    X buscarPorId(int id);
+    List<X> listar();
 }

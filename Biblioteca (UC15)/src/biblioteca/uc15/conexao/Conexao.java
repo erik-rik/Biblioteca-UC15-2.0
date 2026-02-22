@@ -11,18 +11,15 @@ package biblioteca.uc15.conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
             
 public class Conexao {
             
-    public Connection getConexao() {
-            
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "SENAC");
-            return conn;
-            
-        } catch (Exception e) {
-            System.out.println("Erro ao conectar: " + e.getMessage());
-            return null;
-        }
+    private static final String URL = "jdbc:mysql://localhost:3306/biblioteca";
+    private static final String USER = "root";
+    private static final String PASSWORD = "SENAC";
+
+    public static Connection getConexao() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }

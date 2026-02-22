@@ -22,7 +22,7 @@ public class LivroDAO implements GenericoDAO<Livro> {
         String sql = "INSERT INTO livro (titulo, autor, ano, categoria, quantidade) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = Conexao.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, livro.getTitulo());
             stmt.setString(2, livro.getAutor());

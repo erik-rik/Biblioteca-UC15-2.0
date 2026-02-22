@@ -8,6 +8,114 @@ package biblioteca.uc15.DAO;
  *
  * @author PAULO
  */
-public class UsuarioDAO {
+import biblioteca.uc15.model.Usuario;
+import biblioteca.uc15.conexao.Conexao;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class UsuarioDAO implements GenericoDAO<Usuario> {
     
+    @Override
+    public void salvar(Usuario usuario) {
+        String sql = "INSERT INTO usuario(nome, email, cpf) VALUES " + "(?, ?, ?)";
+
+        try (Connection conn = Conexao.getConexao();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());            
+            stmt.setString(3, usuario.getCPF()); 
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao salvar usuário", e);
+        }
+    }
+    
+    @Override
+    public void atualizar(Usuario usuario) {
+        String sql = "UPDATE usuario SET nome=?, email=?, cpf=? WHERE id=?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getCPF());
+            stmt.setInt(4, usuario.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar usuário", e);
+        }
+    }
+    
+    @Override
+    public void excluir(int id) {
+        String sql = "DELETE FROM usuario WHERE id=?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao excluir usuário", e);
+        }
+    }
+    
+    @Override
+    public Usuario buscarPorId(int id) {
+        String sql = "SELECT * FROM usuario WHERE id=?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return mapUsuario(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar livro", e);
+        }
+
+        return null;
+    }
+    
+    @Override
+    public List<Usuario> listar() {
+        String sql = "SELECT * FROM usuario";
+        List<Usuario> livros = new ArrayList<>();
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                livros.add(mapUsuario(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar livros", e);
+        }
+
+        return livros;
+    }
+    
+    private Usuario mapUsuario(ResultSet rs) throws SQLException {
+        Usuario usuario = new Usuario();
+        usuario.setId(rs.getInt("id"));
+        usuario.setNome(rs.getString("nome"));
+        usuario.setEmail(rs.getString("email"));
+        usuario.setCPF(rs.getString("cpf"));
+        return usuario;
+    }
 }

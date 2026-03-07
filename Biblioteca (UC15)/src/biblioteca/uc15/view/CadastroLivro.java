@@ -5,8 +5,8 @@
 package biblioteca.uc15.view;
 
 
-import biblioteca.uc15.DAO.BiblioDAO;
 import biblioteca.uc15.model.Livro;
+import biblioteca.uc15.service.LivroService;
 import javax.swing.JOptionPane;
 
 /**
@@ -245,8 +245,8 @@ public class CadastroLivro extends javax.swing.JFrame {
                 livro.setCategoria(categoria);
                 livro.setQuantidade(quantidade);
                 
-                BiblioDAO biblioDAO = new BiblioDAO();
-                biblioDAO.inserirLivro(livro);
+                LivroService livroService = new LivroService();
+                livroService.cadastrarLivro(livro);
                 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());

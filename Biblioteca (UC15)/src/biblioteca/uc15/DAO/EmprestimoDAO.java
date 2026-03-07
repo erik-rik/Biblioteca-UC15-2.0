@@ -60,17 +60,19 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
     }
     
     @Override
-    public void excluir(int id) {
+    public boolean excluir(int id) {
         String sql = "DELETE FROM emprestimo WHERE id=?";
 
         try (Connection conn = Conexao.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
-            stmt.executeUpdate();
+            
+            return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao excluir empréstimo", e);
+            e.printStackTrace();
+            return false;
         }
     }
     
@@ -95,6 +97,72 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
         return null;
     }
     
+    public List<Emprestimo> buscarPorUsuario(String nomeUsuario) {
+
+        String sql = """
+                SELECT e.id, e.data_emprestimo, e.data_prevista,
+                       u.id AS usuario_id, u.nome,
+                       l.id AS livro_id, l.titulo
+                FROM emprestimo e
+                INNER JOIN usuario u ON e.usuario_id = u.id
+                INNER JOIN livro l ON e.livro_id = l.id
+                WHERE u.nome LIKE ?
+                """;
+
+        List<Emprestimo> lista = new ArrayList<>();
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + nomeUsuario + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                lista.add(mapEmprestimoJoin(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar empréstimos por usuário", e);
+        }
+
+        return lista;
+    }
+
+    
+    public List<Emprestimo> buscarPorLivro(String tituloLivro) {
+
+        String sql = """
+                SELECT e.id, e.data_emprestimo, e.data_prevista,
+                       u.id AS usuario_id, u.nome,
+                       l.id AS livro_id, l.titulo
+                FROM emprestimo e
+                INNER JOIN usuario u ON e.usuario_id = u.id
+                INNER JOIN livro l ON e.livro_id = l.id
+                WHERE l.titulo LIKE ?
+                """;
+
+        List<Emprestimo> lista = new ArrayList<>();
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + tituloLivro + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                lista.add(mapEmprestimoJoin(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar empréstimos por livro", e);
+        }
+
+        return lista;
+    }
+
+    
     @Override
     public List<Emprestimo> listar() {
         String sql = "SELECT e.id, e.data_emprestimo, e.data_prevista, u.id AS usuario_id, u.nome, l.id AS livro_id, l.titulo "
@@ -107,7 +175,7 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                lista.add(mapEmprestimoComJoin(rs));
+                lista.add(mapEmprestimoJoin(rs));
             }
 
         } catch (SQLException e) {
@@ -120,39 +188,42 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
     
     private Emprestimo mapEmprestimo(ResultSet rs) throws SQLException {
 
-        Emprestimo emprestimo = new Emprestimo();
-        emprestimo.setId(rs.getInt("id"));
-        emprestimo.setDataEmprestimo(rs.getDate("data_emprestimo"));
-        emprestimo.setDataPrevista(rs.getDate("data_prevista"));
-        
-        Usuario usuario = new Usuario();
-        usuario.setId(rs.getInt("usuario_id"));
-        emprestimo.setUsuario(usuario);
+        Emprestimo e = new Emprestimo();
 
-        Livro livro = new Livro();
-        livro.setId(rs.getInt("livro_id"));
-        emprestimo.setLivro(livro);
+        e.setId(rs.getInt("id"));
 
-        return emprestimo;
+        Usuario u = new Usuario();
+        u.setId(rs.getInt("usuario_id"));
+        e.setUsuario(u);
+
+        Livro l = new Livro();
+        l.setId(rs.getInt("livro_id"));
+        e.setLivro(l);
+
+        e.setDataEmprestimo(rs.getDate("data_emprestimo"));
+        e.setDataPrevista(rs.getDate("data_prevista"));
+
+        return e;
     }
     
-    private Emprestimo mapEmprestimoComJoin(ResultSet rs) throws SQLException {
+    private Emprestimo mapEmprestimoJoin(ResultSet rs) throws SQLException {
 
-        Emprestimo emprestimo = new Emprestimo();
-        emprestimo.setId(rs.getInt("id"));
-        emprestimo.setDataEmprestimo(rs.getDate("data_emprestimo"));
-        emprestimo.setDataPrevista(rs.getDate("data_prevista"));
+        Emprestimo e = new Emprestimo();
 
-        Usuario usuario = new Usuario();
-        usuario.setId(rs.getInt("usuario_id"));
-        usuario.setNome(rs.getString("nome"));
-        emprestimo.setUsuario(usuario);
+        e.setId(rs.getInt("id"));
+        e.setDataEmprestimo(rs.getDate("data_emprestimo"));
+        e.setDataPrevista(rs.getDate("data_prevista"));
 
-        Livro livro = new Livro();
-        livro.setId(rs.getInt("livro_id"));
-        livro.setTitulo(rs.getString("titulo"));
-        emprestimo.setLivro(livro);
+        Usuario u = new Usuario();
+        u.setId(rs.getInt("usuario_id"));
+        u.setNome(rs.getString("nome"));
+        e.setUsuario(u);
 
-        return emprestimo;
+        Livro l = new Livro();
+        l.setId(rs.getInt("livro_id"));
+        l.setTitulo(rs.getString("titulo"));
+        e.setLivro(l);
+
+        return e;
     }
 }

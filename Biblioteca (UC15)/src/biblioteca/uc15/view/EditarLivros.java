@@ -4,8 +4,9 @@
  */
 package biblioteca.uc15.view;
 
-import biblioteca.uc15.DAO.BiblioDAO;
+
 import biblioteca.uc15.model.Livro;
+import biblioteca.uc15.service.LivroService;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +19,10 @@ public class EditarLivros extends javax.swing.JFrame {
     private int idLivro;
 
     private void preencherEdicao() {
-        BiblioDAO biblioDAO = new BiblioDAO();
-        Livro livro = biblioDAO.getLivros(idLivro);
+        
+        LivroService livroService = new LivroService();
+        Livro livro = livroService.buscarLivro(idLivro);
+        
         if (livro != null) {
             txtTitulo.setText(livro.getTitulo());
             txtAutor.setText(livro.getAutor());
@@ -35,8 +38,10 @@ public class EditarLivros extends javax.swing.JFrame {
      * Creates new form EditarLivros
      */
     public EditarLivros(int id, ListaLivro listaLivro) {
+        
         this.idLivro = id;
         this.listaLivro = listaLivro;
+        
         initComponents();
         preencherEdicao();
     }
@@ -221,6 +226,7 @@ public class EditarLivros extends javax.swing.JFrame {
         int quantidade = Integer.parseInt(txtQuantidade.getText());
         
         try {
+            
             Livro livro = new Livro();
             livro.setId(idLivro);
             livro.setTitulo(txtTitulo.getText());
@@ -230,13 +236,14 @@ public class EditarLivros extends javax.swing.JFrame {
             livro.setQuantidade(quantidade);
             
 
-            BiblioDAO biblioDAO2 = new BiblioDAO();
-            biblioDAO2.atualizarLivro(livro);
+            LivroService livroService = new LivroService();
+            livroService.atualizarLivro(livro);
             
             
             JOptionPane.showMessageDialog(this, "Livro atualizado com sucesso!");
             listaLivro.preencherTabela();
             dispose();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao atualizar livro, Erro: " + e.getMessage());
         }

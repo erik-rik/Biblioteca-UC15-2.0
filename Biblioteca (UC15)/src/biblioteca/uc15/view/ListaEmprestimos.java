@@ -4,8 +4,8 @@
  */
 package biblioteca.uc15.view;
 
-import biblioteca.uc15.DAO.BiblioDAO;
 import biblioteca.uc15.model.Emprestimo;
+import biblioteca.uc15.service.EmprestimoService;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,12 +16,13 @@ import javax.swing.table.TableRowSorter;
  * @author PAULO
  */
 public class ListaEmprestimos extends javax.swing.JFrame {
+    
+    private EmprestimoService emprestimoService = new EmprestimoService();
 
     private void preencherTabelaLivro() {
-        BiblioDAO biblioDAO = new BiblioDAO();
        
         String livroEmprestimo = txtFiltroLivro.getText();
-        List<Emprestimo> listaEmprestimos = biblioDAO.getEmprestimosLivro(livroEmprestimo);
+        List<Emprestimo> listaEmprestimos = emprestimoService.buscarEmprestimosPorLivro(livroEmprestimo);
         
         DefaultTableModel model = (DefaultTableModel) tblEmprestimos.getModel();
         model.setRowCount(0); 
@@ -47,10 +48,9 @@ public class ListaEmprestimos extends javax.swing.JFrame {
     }
     
     private void preencherTabela() {
-        BiblioDAO biblioDAO = new BiblioDAO();
        
         String usuarioEmprestimo = txtFiltroUsuario.getText();
-        List<Emprestimo> listaEmprestimos = biblioDAO.getEmprestimos(usuarioEmprestimo);
+        List<Emprestimo> listaEmprestimos = emprestimoService.buscarEmprestimosPorUsuario(usuarioEmprestimo);
         
         DefaultTableModel model = (DefaultTableModel) tblEmprestimos.getModel();
         model.setRowCount(0); 
@@ -284,8 +284,8 @@ public class ListaEmprestimos extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este empréstimo?", "Confirmação", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            BiblioDAO biblioDAO = new BiblioDAO();
-            boolean sucesso = biblioDAO.excluirEmprestimo(idEmprestimo);
+            
+            boolean sucesso = emprestimoService.excluirEmprestimo(idEmprestimo);
 
             if (sucesso) {
                 JOptionPane.showMessageDialog(this, "Empréstimo excluído com sucesso!");

@@ -15,7 +15,7 @@ public interface GenericoDAO<X> {
     
     void salvar(X entidade);
     void atualizar(X entidade);
-    void excluir(int id);
+    boolean excluir(int id);
     X buscarPorId(int id);
     List<X> listar();
 }

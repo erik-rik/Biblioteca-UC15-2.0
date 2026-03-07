@@ -4,9 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/service/EmprestimoService.java</file>
+            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/model/Livro.java</file>
+            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/EditarUsuarios.java</file>
+            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/EditarLivros.java</file>
+            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/DAO/GenericoDAO.java</file>
             <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/service/UsuarioService.java</file>
             <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/TelaInicial.java</file>
             <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/service/LivroService.java</file>
+            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/ListaEmprestimos.java</file>
+            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/CadastroUsuario.java</file>
+            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/DAO/EmprestimoDAO.java</file>
         </group>
     </open-files>
 </project-private>

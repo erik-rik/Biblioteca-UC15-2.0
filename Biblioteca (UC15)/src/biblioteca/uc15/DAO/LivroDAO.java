@@ -59,7 +59,7 @@ public class LivroDAO implements GenericoDAO<Livro> {
     }
 
     @Override
-    public void excluir(int id) {
+    public boolean excluir(int id) {
         String sql = "DELETE FROM livro WHERE id=?";
 
         try (Connection conn = Conexao.getConexao();
@@ -67,9 +67,11 @@ public class LivroDAO implements GenericoDAO<Livro> {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
+            return true;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao excluir livro", e);
+            e.printStackTrace();
+            return false;
         }
     }
 

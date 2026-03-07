@@ -4,8 +4,8 @@
  */
 package biblioteca.uc15.view;
 
-import biblioteca.uc15.DAO.BiblioDAO;
 import biblioteca.uc15.model.Usuario;
+import biblioteca.uc15.service.UsuarioService;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +18,10 @@ public class EditarUsuarios extends javax.swing.JFrame {
     private int idUsuario;
 
     private void preencherEdicao() {
-        BiblioDAO biblioDAO = new BiblioDAO();
-        Usuario usuario = biblioDAO.getUsuarios(idUsuario);
+        
+        UsuarioService usuarioService = new UsuarioService();
+        Usuario usuario = usuarioService.buscarUsuario(idUsuario);
+        
         if (usuario != null) {
             txtNome.setText(usuario.getNome());
             txtEmail.setText(usuario.getEmail());
@@ -196,8 +198,8 @@ public class EditarUsuarios extends javax.swing.JFrame {
                 usuario.setEmail(email);
                 usuario.setCPF(cpf);       
                 
-                BiblioDAO biblioDAO = new BiblioDAO();
-                biblioDAO.atualizarUsuario(usuario);          
+                UsuarioService usuarioService = new UsuarioService();
+                usuarioService.atualizarUsuario(usuario);          
             
                 JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!");
                 listaUsuario.preencherTabela();

@@ -55,7 +55,7 @@ public class UsuarioDAO implements GenericoDAO<Usuario> {
     }
     
     @Override
-    public void excluir(int id) {
+    public boolean excluir(int id) {
         String sql = "DELETE FROM usuario WHERE id=?";
 
         try (Connection conn = Conexao.getConexao();
@@ -63,9 +63,11 @@ public class UsuarioDAO implements GenericoDAO<Usuario> {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
+            return true;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao excluir usuário", e);
+            e.printStackTrace();
+            return false;
         }
     }
     

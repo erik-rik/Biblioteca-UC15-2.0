@@ -58,9 +58,17 @@ public class EmprestimoService {
         livro.setQuantidade(livro.getQuantidadeDisponivel() + 1);
         livroDAO.atualizar(livro);
     }
+    
+    public List<Emprestimo> buscarEmprestimosPorUsuario(String nome) {
+        return emprestimoDAO.buscarPorUsuario(nome);
+    }
 
-    public void excluirEmprestimo(int id) {
-        emprestimoDAO.excluir(id);
+    public List<Emprestimo> buscarEmprestimosPorLivro(String titulo) {
+        return emprestimoDAO.buscarPorLivro(titulo);
+    }
+
+    public boolean excluirEmprestimo(int id) {
+        return emprestimoDAO.excluir(id);
     }
 
     public Emprestimo buscarEmprestimo(int id) {

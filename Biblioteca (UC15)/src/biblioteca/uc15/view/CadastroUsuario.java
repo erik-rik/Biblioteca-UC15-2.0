@@ -4,8 +4,8 @@
  */
 package biblioteca.uc15.view;
 
-import biblioteca.uc15.DAO.BiblioDAO;
 import biblioteca.uc15.model.Usuario;
+import biblioteca.uc15.service.UsuarioService;
 import javax.swing.JOptionPane;
 
 /**
@@ -215,8 +215,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 usuario.setEmail(email);
                 usuario.setCPF(CPF);
                 
-                BiblioDAO biblioDAO = new BiblioDAO();
-                biblioDAO.inserirUsuario(usuario);           
+                UsuarioService usuarioService = new UsuarioService();
+                usuarioService.cadastrarUsuario(usuario);
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());
             }

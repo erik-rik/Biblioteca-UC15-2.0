@@ -4,10 +4,48 @@
  */
 package biblioteca.uc15.service;
 
+import biblioteca.uc15.DAO.LivroDAO;
+import biblioteca.uc15.model.Livro;
+import java.util.List;
+
 /**
  *
  * @author PAULO
  */
 public class LivroService {
     
+    private LivroDAO livroDAO;
+
+    public LivroService() {
+        this.livroDAO = new LivroDAO();
+    }
+
+    public void cadastrarLivro(Livro livro) {
+
+        if (livro.getTitulo() == null || livro.getTitulo().isEmpty()) {
+            throw new IllegalArgumentException("Título do livro é obrigatório.");
+        }
+
+        if (livro.getQuantidadeDisponivel() < 0) {
+            throw new IllegalArgumentException("Quantidade inválida.");
+        }
+
+        livroDAO.salvar(livro);
+    }
+
+    public void atualizarLivro(Livro livro) {
+        livroDAO.atualizar(livro);
+    }
+
+    public void excluirLivro(int id) {
+        livroDAO.excluir(id);
+    }
+
+    public Livro buscarLivro(int id) {
+        return livroDAO.buscarPorId(id);
+    }
+
+    public List<Livro> listarLivros() {
+        return livroDAO.listar();
+    }
 }

@@ -4,8 +4,8 @@
  */
 package biblioteca.uc15.view;
 
-import biblioteca.uc15.DAO.BiblioDAO;
 import biblioteca.uc15.model.Usuario;
+import biblioteca.uc15.service.UsuarioService;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,78 +16,82 @@ import javax.swing.table.TableRowSorter;
  * @author PAULO
  */
 public class ListaUsuarios extends javax.swing.JFrame {
+    
+    UsuarioService usuarioService = new UsuarioService();
 
     public void preencherTabela() {
-        BiblioDAO biblioDAO2 = new BiblioDAO();
-
+        
         String nomeUsuario = txtFiltroNome.getText();
-        List<Usuario> listaUsuarios = biblioDAO2.getUsuarios(nomeUsuario);
+        List<Usuario> listaUsuarios = usuarioService.buscarPorNome(nomeUsuario);
 
         DefaultTableModel tabelaUsuarios = (DefaultTableModel) tblUsuarios.getModel();
-        tabelaUsuarios.setNumRows(0);
+        tabelaUsuarios.setRowCount(0);
 
-    
         tblUsuarios.setRowSorter(new TableRowSorter<>(tblUsuarios.getModel()));
 
         if (listaUsuarios != null) {
-            for (Usuario c : listaUsuarios) {
-                Object[] obj = new Object[] {
-                    c.getId(),              
-                    c.getNome(),
-                    c.getEmail(),
-                    c.getCPF()
+
+            for (Usuario u : listaUsuarios) {
+
+                Object[] obj = {
+                    u.getId(),
+                    u.getNome(),
+                    u.getEmail(),
+                    u.getCPF()
                 };
-            tabelaUsuarios.addRow(obj);
+
+                tabelaUsuarios.addRow(obj);
             }
         }
     }
     
     public void preencherTabelaEmail() {
-        BiblioDAO biblioDAO2 = new BiblioDAO();
-
+        
         String usuarioEmail = txtFiltroEmail.getText();
-        List<Usuario> listaUsuarios = biblioDAO2.getUsuariosEmail(usuarioEmail);
+        List<Usuario> listaUsuarios = usuarioService.buscarPorEmail(usuarioEmail);
 
         DefaultTableModel tabelaUsuarios = (DefaultTableModel) tblUsuarios.getModel();
-        tabelaUsuarios.setNumRows(0);
+        tabelaUsuarios.setRowCount(0);
 
-    
         tblUsuarios.setRowSorter(new TableRowSorter<>(tblUsuarios.getModel()));
 
         if (listaUsuarios != null) {
-            for (Usuario c : listaUsuarios) {
-                Object[] obj = new Object[] {
-                    c.getId(),              
-                    c.getNome(),
-                    c.getEmail(),
-                    c.getCPF()
+
+            for (Usuario u : listaUsuarios) {
+
+                Object[] obj = {
+                    u.getId(),
+                    u.getNome(),
+                    u.getEmail(),
+                    u.getCPF()
                 };
-            tabelaUsuarios.addRow(obj);
+
+                tabelaUsuarios.addRow(obj);
             }
         }
     }
     
     public void preencherTabelaCPF() {
-        BiblioDAO biblioDAO2 = new BiblioDAO();
-
         String usuarioCPF = txtFiltroCPF.getText();
-        List<Usuario> listaUsuarios = biblioDAO2.getUsuariosCPF(usuarioCPF);
+        List<Usuario> listaUsuarios = usuarioService.buscarPorCPF(usuarioCPF);
 
         DefaultTableModel tabelaUsuarios = (DefaultTableModel) tblUsuarios.getModel();
-        tabelaUsuarios.setNumRows(0);
+        tabelaUsuarios.setRowCount(0);
 
-    
         tblUsuarios.setRowSorter(new TableRowSorter<>(tblUsuarios.getModel()));
 
         if (listaUsuarios != null) {
-            for (Usuario c : listaUsuarios) {
-                Object[] obj = new Object[] {
-                    c.getId(),              
-                    c.getNome(),
-                    c.getEmail(),
-                    c.getCPF()
+
+            for (Usuario u : listaUsuarios) {
+
+                Object[] obj = {
+                    u.getId(),
+                    u.getNome(),
+                    u.getEmail(),
+                    u.getCPF()
                 };
-            tabelaUsuarios.addRow(obj);
+
+                tabelaUsuarios.addRow(obj);
             }
         }
     }
@@ -334,8 +338,8 @@ public class ListaUsuarios extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este usuário?", "Confirmação", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            BiblioDAO biblioDAO = new BiblioDAO();
-            boolean sucesso = biblioDAO.excluirUsuario(idUsuario);
+            
+            boolean sucesso = usuarioService.excluirUsuario(idUsuario);
 
             if (sucesso) {
                 JOptionPane.showMessageDialog(this, "Livro excluído com sucesso!");

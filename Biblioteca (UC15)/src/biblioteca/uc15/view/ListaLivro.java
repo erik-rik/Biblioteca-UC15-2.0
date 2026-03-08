@@ -354,8 +354,8 @@ public class ListaLivro extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este livro?", "Confirmação", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            BiblioDAO biblioDAO = new BiblioDAO();
-            boolean sucesso = biblioDAO.excluirLivro(idLivro);
+            
+            boolean sucesso = livroService.excluirLivro(idLivro);
 
             if (sucesso) {
                 JOptionPane.showMessageDialog(this, "Livro excluído com sucesso!");

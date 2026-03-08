@@ -41,12 +41,24 @@ public class UsuarioService {
         usuarioDAO.atualizar(usuario);
     }
 
-    public void excluirUsuario(int id) {
-        usuarioDAO.excluir(id);
+    public boolean excluirUsuario(int id) {
+        return usuarioDAO.excluir(id);
     }
 
     public Usuario buscarUsuario(int id) {
         return usuarioDAO.buscarPorId(id);
+    }
+    
+    public List<Usuario> buscarPorNome(String nome) {
+        return usuarioDAO.buscarPorNome(nome);
+    }
+
+    public List<Usuario> buscarPorEmail(String email) {
+        return usuarioDAO.buscarPorEmail(email);
+    }
+
+    public List<Usuario> buscarPorCPF(String cpf) {
+        return usuarioDAO.buscarPorCPF(cpf);
     }
 
     public List<Usuario> listarUsuarios() {

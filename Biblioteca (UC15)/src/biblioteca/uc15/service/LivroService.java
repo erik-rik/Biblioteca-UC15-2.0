@@ -37,8 +37,8 @@ public class LivroService {
         livroDAO.atualizar(livro);
     }
 
-    public void excluirLivro(int id) {
-        livroDAO.excluir(id);
+    public boolean excluirLivro(int id) {
+        return livroDAO.excluir(id);
     }
 
     public Livro buscarLivro(int id) {

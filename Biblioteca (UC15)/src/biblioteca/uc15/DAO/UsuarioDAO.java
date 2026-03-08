@@ -92,6 +92,102 @@ public class UsuarioDAO implements GenericoDAO<Usuario> {
         return null;
     }
     
+    public List<Usuario> buscarPorNome(String nome) {
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+        String sql = "SELECT * FROM usuario WHERE nome LIKE ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + nome + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Usuario usuario = new Usuario();
+
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setCPF(rs.getString("cpf"));
+
+                usuarios.add(usuario);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
+
+    public List<Usuario> buscarPorEmail(String email) {
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+        String sql = "SELECT * FROM usuario WHERE email LIKE ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + email + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Usuario usuario = new Usuario();
+
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setCPF(rs.getString("cpf"));
+
+                usuarios.add(usuario);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
+
+    public List<Usuario> buscarPorCPF(String cpf) {
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+        String sql = "SELECT * FROM usuario WHERE cpf LIKE ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + cpf + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Usuario usuario = new Usuario();
+
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setCPF(rs.getString("cpf"));
+
+                usuarios.add(usuario);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
+    
     @Override
     public List<Usuario> listar() {
         String sql = "SELECT * FROM usuario";

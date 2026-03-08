@@ -218,6 +218,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 UsuarioService usuarioService = new UsuarioService();
                 usuarioService.cadastrarUsuario(usuario);
                 
+                JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());
             }

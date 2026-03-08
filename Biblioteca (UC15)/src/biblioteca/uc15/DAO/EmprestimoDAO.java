@@ -33,8 +33,6 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
             stmt.setDate(4, new java.sql.Date(emprestimo.getDataPrevista().getTime()));
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Empréstimo cadastrado com sucesso!");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar empréstimo", e);
         }
@@ -54,9 +52,7 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
             stmt.setDate(4, new java.sql.Date(emprestimo.getDataPrevista().getTime()));
             stmt.setInt(5, emprestimo.getId());
 
-            stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Empréstimo atualizado com sucesso!");
+            stmt.executeUpdate();           
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar empréstimo", e);

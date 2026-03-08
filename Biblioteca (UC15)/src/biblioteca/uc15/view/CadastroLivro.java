@@ -247,6 +247,7 @@ public class CadastroLivro extends javax.swing.JFrame {
                 
                 LivroService livroService = new LivroService();
                 livroService.cadastrarLivro(livro);
+                JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
                 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());

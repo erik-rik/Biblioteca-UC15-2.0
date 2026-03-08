@@ -31,7 +31,6 @@ public class UsuarioDAO implements GenericoDAO<Usuario> {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar usuário", e);
         }
@@ -51,7 +50,6 @@ public class UsuarioDAO implements GenericoDAO<Usuario> {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso!");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar usuário", e);
         }

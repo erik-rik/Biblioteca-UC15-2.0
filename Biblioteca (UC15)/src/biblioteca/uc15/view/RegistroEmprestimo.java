@@ -268,7 +268,9 @@ public class RegistroEmprestimo extends javax.swing.JFrame {
                 emprestimo.setDataPrevista(dataPrevista);
                 
                 EmprestimoService emprestimoService = new EmprestimoService();
-                emprestimoService.realizarEmprestimo(emprestimo);           
+                emprestimoService.realizarEmprestimo(emprestimo);   
+                
+                JOptionPane.showMessageDialog(null, "Empréstimo cadastrado com sucesso!");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());
             }

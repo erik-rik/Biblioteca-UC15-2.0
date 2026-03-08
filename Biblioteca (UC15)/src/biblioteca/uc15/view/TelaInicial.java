@@ -4,7 +4,7 @@
  */
 package biblioteca.uc15.view;
 
-import biblioteca.uc15.conexao.Conexao;
+import biblioteca.uc15.service.UserService;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +13,13 @@ import javax.swing.JOptionPane;
  */
 public class TelaInicial extends javax.swing.JFrame {
 
+    UserService userService = new UserService();
+    
     /**
      * Creates new form TelaInicial
      */
     public TelaInicial() {
         initComponents();
-        Conexao conexao = new Conexao();
-        conexao.getConexao();
     }
     
     
@@ -182,23 +182,28 @@ public class TelaInicial extends javax.swing.JFrame {
         
         String login = txtLogin.getText();
         String senha = txtSenha.getText();
-        
+
         if (login.isEmpty() || senha.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.WARNING_MESSAGE);
             return;
-        } else {
-            try {
-                if (login.equals("teste") & senha.equals("teste")){
-                    JOptionPane.showMessageDialog(this, "Olá, seja bem vindo!");
-                    TelaMenu telaMenu = new TelaMenu();
-                    telaMenu.setVisible(true);     
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos!");
-                }
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());
+        }
+        try {
+
+            boolean autenticado = userService.autenticar(login, senha);
+
+            if (autenticado) {
+
+                JOptionPane.showMessageDialog(this, "Olá, seja bem vindo!");
+
+                TelaMenu telaMenu = new TelaMenu();
+                telaMenu.setVisible(true);
+
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos!");
             }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 

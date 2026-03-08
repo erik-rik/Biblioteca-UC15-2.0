@@ -4,6 +4,7 @@
  */
 package biblioteca.uc15.service;
 
+import biblioteca.uc15.DAO.EmprestimoDAO;
 import biblioteca.uc15.DAO.UsuarioDAO;
 import biblioteca.uc15.model.Usuario;
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.List;
 public class UsuarioService {
     
     private UsuarioDAO usuarioDAO;
+    private EmprestimoDAO emprestimoDAO;
 
     public UsuarioService() {
         this.usuarioDAO = new UsuarioDAO();
+        this.emprestimoDAO = new EmprestimoDAO();
     }
 
     public void cadastrarUsuario(Usuario usuario) {
@@ -41,7 +44,10 @@ public class UsuarioService {
         usuarioDAO.atualizar(usuario);
     }
 
-    public boolean excluirUsuario(int id) {
+    public boolean excluirUsuario(int id) { 
+        if(emprestimoDAO.existeEmprestimoUsuario(id)){
+            return false;
+        }
         return usuarioDAO.excluir(id);
     }
 

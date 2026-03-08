@@ -361,7 +361,7 @@ public class ListaLivro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Livro excluído com sucesso!");
                 preencherTabela();
             } else {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir livro.");
+                JOptionPane.showMessageDialog(this, "Não é possível excluir livros com empréstimos cadastrados.");
             }
         }    
     }//GEN-LAST:event_btnExcluirActionPerformed

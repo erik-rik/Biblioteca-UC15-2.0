@@ -185,6 +185,43 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
         return lista;
     }
 
+    public boolean existeEmprestimoUsuario(int usuarioId) {
+
+        String sql = "SELECT 1 FROM emprestimo WHERE usuario_id = ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, usuarioId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean existeEmprestimoLivro(int livroId) {
+
+        String sql = "SELECT 1 FROM emprestimo WHERE livro_id = ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, livroId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     
     private Emprestimo mapEmprestimo(ResultSet rs) throws SQLException {
 

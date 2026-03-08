@@ -342,10 +342,10 @@ public class ListaUsuarios extends javax.swing.JFrame {
             boolean sucesso = usuarioService.excluirUsuario(idUsuario);
 
             if (sucesso) {
-                JOptionPane.showMessageDialog(this, "Livro excluído com sucesso!");
+                JOptionPane.showMessageDialog(this, "Usuário excluído com sucesso!");
                 preencherTabela();
             } else {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir livro.");
+                JOptionPane.showMessageDialog(this, "Não é possível excluir usuário com empréstimos cadastrados.");
             }
         }    
     }//GEN-LAST:event_btnExcluirActionPerformed

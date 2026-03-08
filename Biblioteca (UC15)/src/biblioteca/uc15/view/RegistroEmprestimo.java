@@ -4,10 +4,10 @@
  */
 package biblioteca.uc15.view;
 
-import biblioteca.uc15.DAO.BiblioDAO;
 import biblioteca.uc15.model.Emprestimo;
 import biblioteca.uc15.model.Livro;
 import biblioteca.uc15.model.Usuario;
+import biblioteca.uc15.service.EmprestimoService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -267,8 +267,8 @@ public class RegistroEmprestimo extends javax.swing.JFrame {
                 emprestimo.setDataEmprestimo(dataEmprestimo);
                 emprestimo.setDataPrevista(dataPrevista);
                 
-                BiblioDAO biblioDAO = new BiblioDAO();
-                biblioDAO.inserirEmprestimo(emprestimo);           
+                EmprestimoService emprestimoService = new EmprestimoService();
+                emprestimoService.realizarEmprestimo(emprestimo);           
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());
             }

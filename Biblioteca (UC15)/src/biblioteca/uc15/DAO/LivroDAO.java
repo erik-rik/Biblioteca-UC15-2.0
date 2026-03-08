@@ -95,6 +95,108 @@ public class LivroDAO implements GenericoDAO<Livro> {
 
         return null;
     }
+    
+    public List<Livro> buscarPorTitulo(String titulo) {
+
+        List<Livro> livros = new ArrayList<>();
+
+        String sql = "SELECT * FROM livro WHERE titulo LIKE ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + titulo + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Livro livro = new Livro();
+
+                livro.setId(rs.getInt("id"));
+                livro.setTitulo(rs.getString("titulo"));
+                livro.setAutor(rs.getString("autor"));
+                livro.setAno(rs.getInt("ano"));
+                livro.setCategoria(rs.getString("categoria"));
+                livro.setQuantidade(rs.getInt("quantidade"));
+
+                livros.add(livro);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return livros;
+    }
+
+    public List<Livro> buscarPorAutor(String autor) {
+
+        List<Livro> livros = new ArrayList<>();
+
+        String sql = "SELECT * FROM livro WHERE autor LIKE ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + autor + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Livro livro = new Livro();
+
+                livro.setId(rs.getInt("id"));
+                livro.setTitulo(rs.getString("titulo"));
+                livro.setAutor(rs.getString("autor"));
+                livro.setAno(rs.getInt("ano"));
+                livro.setCategoria(rs.getString("categoria"));
+                livro.setQuantidade(rs.getInt("quantidade"));
+
+                livros.add(livro);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return livros;
+    }
+
+    public List<Livro> buscarPorCategoria(String categoria) {
+
+        List<Livro> livros = new ArrayList<>();
+
+        String sql = "SELECT * FROM livro WHERE categoria = ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, categoria);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Livro livro = new Livro();
+
+                livro.setId(rs.getInt("id"));
+                livro.setTitulo(rs.getString("titulo"));
+                livro.setAutor(rs.getString("autor"));
+                livro.setAno(rs.getInt("ano"));
+                livro.setCategoria(rs.getString("categoria"));
+                livro.setQuantidade(rs.getInt("quantidade"));
+
+                livros.add(livro);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return livros;
+    }
 
     @Override
     public List<Livro> listar() {

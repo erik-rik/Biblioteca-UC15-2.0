@@ -5,8 +5,9 @@
 package biblioteca.uc15.view;
 
 
-import biblioteca.uc15.DAO.BiblioDAO;
+
 import biblioteca.uc15.model.Livro;
+import biblioteca.uc15.service.LivroService;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,85 +19,88 @@ import javax.swing.table.TableRowSorter;
  */
 public class ListaLivro extends javax.swing.JFrame {
     
-
+    private LivroService livroService = new LivroService();
     
     public void preencherTabela() {
-        BiblioDAO biblioDAO = new BiblioDAO();
 
         String nomeLivro = txtFiltroTitulo.getText();
-        List<Livro> listaLivros = biblioDAO.getLivros(nomeLivro);
+        List<Livro> listaLivros = livroService.buscarPorTitulo(nomeLivro);
 
         DefaultTableModel tabelaLivros = (DefaultTableModel) tblLivros.getModel();
-        tabelaLivros.setNumRows(0);
+        tabelaLivros.setRowCount(0);
 
-    
         tblLivros.setRowSorter(new TableRowSorter<>(tblLivros.getModel()));
 
         if (listaLivros != null) {
-            for (Livro c : listaLivros) {
-                Object[] obj = new Object[] {
-                    c.getId(),              
-                    c.getTitulo(),
-                    c.getAutor(),
-                    c.getAno(),
-                    c.getCategoria(),
-                    c.getQuantidadeDisponivel()
+
+            for (Livro l : listaLivros) {
+
+                Object[] obj = {
+                    l.getId(),
+                    l.getTitulo(),
+                    l.getAutor(),
+                    l.getAno(),
+                    l.getCategoria(),
+                    l.getQuantidadeDisponivel()
                 };
-            tabelaLivros.addRow(obj);
+
+                tabelaLivros.addRow(obj);
             }
         }
     }
     
     public void preencherTabelaAutor() {
-        BiblioDAO biblioDAO = new BiblioDAO();
-
+        
         String nomeAutor = txtFiltroAutor.getText();
-        List<Livro> listaLivros = biblioDAO.getLivrosAutor(nomeAutor);
+        List<Livro> listaLivros = livroService.buscarPorAutor(nomeAutor);
 
         DefaultTableModel tabelaLivros = (DefaultTableModel) tblLivros.getModel();
-        tabelaLivros.setNumRows(0);
+        tabelaLivros.setRowCount(0);
 
-    
         tblLivros.setRowSorter(new TableRowSorter<>(tblLivros.getModel()));
 
         if (listaLivros != null) {
-            for (Livro c : listaLivros) {
-                Object[] obj = new Object[] {
-                    c.getId(),              
-                    c.getTitulo(),
-                    c.getAutor(),
-                    c.getAno(),
-                    c.getCategoria(),
-                    c.getQuantidadeDisponivel()
+
+            for (Livro l : listaLivros) {
+
+                Object[] obj = {
+                    l.getId(),
+                    l.getTitulo(),
+                    l.getAutor(),
+                    l.getAno(),
+                    l.getCategoria(),
+                    l.getQuantidadeDisponivel()
                 };
-            tabelaLivros.addRow(obj);
+
+                tabelaLivros.addRow(obj);
             }
         }
     }
     
     public void preencherTabelaCategoria() {
-        BiblioDAO biblioDAO = new BiblioDAO();
-
+        
         String nomeCategoria = cmbFiltroCategoria.getSelectedItem().toString();
-        List<Livro> listaLivros = biblioDAO.getLivrosCategoria(nomeCategoria);
+        List<Livro> listaLivros = livroService.buscarPorCategoria(nomeCategoria);
 
         DefaultTableModel tabelaLivros = (DefaultTableModel) tblLivros.getModel();
-        tabelaLivros.setNumRows(0);
+        tabelaLivros.setRowCount(0);
 
-    
         tblLivros.setRowSorter(new TableRowSorter<>(tblLivros.getModel()));
 
         if (listaLivros != null) {
-            for (Livro c : listaLivros) {
-                Object[] obj = new Object[] {
-                    c.getId(),              
-                    c.getTitulo(),
-                    c.getAutor(),
-                    c.getAno(),
-                    c.getCategoria(),
-                    c.getQuantidadeDisponivel()
+
+            for (Livro l : listaLivros) {
+
+                Object[] obj = {
+                    l.getId(),
+                    l.getTitulo(),
+                    l.getAutor(),
+                    l.getAno(),
+                    l.getCategoria(),
+                    l.getQuantidadeDisponivel()
                 };
-            tabelaLivros.addRow(obj);
+
+                tabelaLivros.addRow(obj);
             }
         }
     }

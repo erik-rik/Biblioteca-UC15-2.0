@@ -44,6 +44,18 @@ public class LivroService {
     public Livro buscarLivro(int id) {
         return livroDAO.buscarPorId(id);
     }
+    
+    public List<Livro> buscarPorTitulo(String titulo) {
+        return livroDAO.buscarPorTitulo(titulo);
+    }
+
+    public List<Livro> buscarPorAutor(String autor) {
+        return livroDAO.buscarPorAutor(autor);
+    }
+
+    public List<Livro> buscarPorCategoria(String categoria) {
+        return livroDAO.buscarPorCategoria(categoria);
+    }
 
     public List<Livro> listarLivros() {
         return livroDAO.listar();

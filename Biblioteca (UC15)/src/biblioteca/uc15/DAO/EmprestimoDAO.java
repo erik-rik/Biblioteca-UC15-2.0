@@ -16,6 +16,7 @@ import biblioteca.uc15.model.Usuario;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
         
 public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
     
@@ -33,6 +34,7 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
 
             stmt.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, "Empréstimo cadastrado com sucesso!");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar empréstimo", e);
         }
@@ -53,6 +55,8 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
             stmt.setInt(5, emprestimo.getId());
 
             stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Empréstimo atualizado com sucesso!");
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar empréstimo", e);
@@ -67,7 +71,6 @@ public class EmprestimoDAO implements GenericoDAO<Emprestimo> {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
-            
             return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {

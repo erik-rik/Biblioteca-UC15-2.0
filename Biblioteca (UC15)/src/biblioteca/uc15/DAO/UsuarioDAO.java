@@ -14,6 +14,7 @@ import biblioteca.uc15.conexao.Conexao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class UsuarioDAO implements GenericoDAO<Usuario> {
     
@@ -30,6 +31,7 @@ public class UsuarioDAO implements GenericoDAO<Usuario> {
 
             stmt.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar usuário", e);
         }
@@ -49,6 +51,7 @@ public class UsuarioDAO implements GenericoDAO<Usuario> {
 
             stmt.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso!");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar usuário", e);
         }

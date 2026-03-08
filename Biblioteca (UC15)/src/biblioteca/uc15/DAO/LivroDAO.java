@@ -14,6 +14,7 @@ import biblioteca.uc15.conexao.Conexao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class LivroDAO implements GenericoDAO<Livro> {
 
@@ -31,6 +32,8 @@ public class LivroDAO implements GenericoDAO<Livro> {
             stmt.setInt(5, livro.getQuantidadeDisponivel());
 
             stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar livro", e);
@@ -53,6 +56,8 @@ public class LivroDAO implements GenericoDAO<Livro> {
 
             stmt.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, "Livro atualizado com sucesso!");
+            
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar livro", e);
         }
@@ -68,6 +73,8 @@ public class LivroDAO implements GenericoDAO<Livro> {
             stmt.setInt(1, id);
             stmt.executeUpdate();
             return true;
+            
+            
 
         } catch (SQLException e) {
             e.printStackTrace();

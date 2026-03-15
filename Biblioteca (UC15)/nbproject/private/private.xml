@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/service/EmprestimoService.java</file>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/model/Livro.java</file>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/EditarUsuarios.java</file>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/EditarLivros.java</file>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/TelaInicial.java</file>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/service/LivroService.java</file>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/ListaEmprestimos.java</file>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/ListaLivro.java</file>
-            <file>file:/C:/Users/MIKE/Documents/NetBeansProjects/GitHub/Biblioteca-UC15-2.0-/Biblioteca%20(UC15)/src/biblioteca/uc15/view/CadastroUsuario.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

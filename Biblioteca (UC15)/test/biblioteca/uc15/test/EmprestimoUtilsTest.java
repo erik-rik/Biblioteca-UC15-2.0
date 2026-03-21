@@ -4,57 +4,64 @@
  */
 package biblioteca.uc15.test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  *
  * @author PAULO
  */
+import biblioteca.uc15.service.EmprestimoUtils;
+import java.util.Calendar;
+import java.util.Date;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 public class EmprestimoUtilsTest {
-    
-    public EmprestimoUtilsTest() {
+
+    @Test
+    public void deveCalcularDiasCorretamente() {
+
+        Calendar cal = Calendar.getInstance();
+
+        cal.set(2025, Calendar.MAY, 1);
+        Date inicio = cal.getTime();
+
+        cal.set(2025, Calendar.MAY, 5);
+        Date fim = cal.getTime();
+
+        long dias = EmprestimoUtils.calcularDiasEmprestimo(inicio, fim);
+
+        assertEquals(4, dias);
     }
 
-    @org.junit.jupiter.api.BeforeAll
-    public static void setUpClass() throws Exception {
-    }
+    @Test
+    public void deveRetornarZeroQuandoMesmaData() {
 
-    @org.junit.jupiter.api.AfterAll
-    public static void tearDownClass() throws Exception {
-    }
+        Calendar cal = Calendar.getInstance();
 
-    @org.junit.jupiter.api.BeforeEach
-    public void setUp() throws Exception {
-    }
+        cal.set(2025, Calendar.MAY, 1);
+        Date data1 = cal.getTime();
 
-    @org.junit.jupiter.api.AfterEach
-    public void tearDown() throws Exception {
+        cal.set(2025, Calendar.MAY, 1);
+        Date data2 = cal.getTime();
+
+        long dias = EmprestimoUtils.calcularDiasEmprestimo(data1, data2);
+
+        assertEquals(0, dias);
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
+    @Test
+    public void deveLancarErroQuandoDataInvalida() {
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+        Calendar cal = Calendar.getInstance();
+
+        cal.set(2025, Calendar.MAY, 5);
+        Date inicio = cal.getTime();
+
+        cal.set(2025, Calendar.MAY, 1);
+        Date fim = cal.getTime();
+
+        EmprestimoUtils.calcularDiasEmprestimo(inicio, fim);
+    }
 }
+
